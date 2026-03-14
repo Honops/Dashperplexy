@@ -1,0 +1,130 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  font-family:system-ui,-apple-system,sans-serif; 
+  background:#f8fafc; 
+  color:#1e293b; 
+  line-height:1.4; 
+  padding:1rem; 
+  min-height:100vh;
+}
+
+/* Header ultra-compact */
+header { 
+  text-align:center; 
+  margin-bottom:1.5rem; 
+  background:rgba(255,255,255,0.9); 
+  padding:1rem; 
+  border-radius:16px; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+h1 { 
+  font-size:1.6rem; 
+  font-weight:800; 
+  color:#1e40af; 
+  margin-bottom:0.5rem; 
+}
+.today { 
+  font-size:0.85rem; 
+  color:#64748b; 
+  font-weight:500; 
+}
+
+/* Banner événement */
+.banner { 
+  background:linear-gradient(135deg,#ef4444,#f59e0b); 
+  color:white; 
+  padding:1rem; 
+  border-radius:12px; 
+  margin-bottom:1.5rem; 
+  text-align:center; 
+}
+.banner h2 { font-size:1.3rem; margin:0; }
+
+/* Grille plats MOBILE : 2 images + 1 vidéo */
+main { display:grid; gap:1rem; }
+.plat { 
+  background:white; 
+  border-radius:16px; 
+  padding:1rem; 
+  box-shadow:0 6px 20px rgba(0,0,0,0.08); 
+  transition:transform 0.2s;
+}
+.plat:hover { transform:translateY(-2px); }
+
+/* Layout images/vidéo : 2 côte à côte + vidéo dessous */
+.media-row { 
+  display:grid; 
+  grid-template-columns:1fr 1fr; 
+  gap:0.5rem; 
+  margin-bottom:0.75rem; 
+}
+.media-row img { 
+  width:100%; 
+  height:100px; 
+  object-fit:cover; 
+  border-radius:8px; 
+}
+.media-video { 
+  grid-column:1/-1; 
+  width:100%; 
+  height:80px; 
+  object-fit:cover; 
+  border-radius:8px; 
+  background:#e2e8f0;
+}
+
+/* Texte plat */
+.nom { 
+  font-size:1.1rem; 
+  font-weight:700; 
+  margin-bottom:0.25rem; 
+  color:#1e293b; 
+}
+.categ { 
+  display:inline-block; 
+  background:#dbeafe; 
+  color:#1e40af; 
+  padding:0.2rem 0.6rem; 
+  border-radius:12px; 
+  font-size:0.75rem; 
+  font-weight:600; 
+  margin-bottom:0.5rem; 
+}
+.prix { 
+  font-size:1.4rem; 
+  font-weight:800; 
+  color:#ea580c; 
+  margin-bottom:0.25rem; 
+}
+.event-tag { 
+  background:rgba(254,202,87,0.2); 
+  color:#92400e; 
+  padding:0.25rem 0.75rem; 
+  border-radius:8px; 
+  font-size:0.8rem; 
+  font-weight:500;
+}
+
+/* Loading */
+.loading { 
+  grid-column:1/-1; 
+  text-align:center; 
+  padding:2rem; 
+  color:#64748b; 
+  font-size:1.1rem; 
+}
+
+/* EXTRA PETIT ÉCRAN */
+@media (max-width:400px) {
+  body { padding:0.75rem; }
+  .media-row img { height:80px; }
+  .media-video { height:70px; }
+  .plat { padding:0.75rem; }
+}
+
+/* GRAND ÉCRAN : 3 colonnes */
+@media (min-width:900px) {
+  body { padding:2rem; max-width:1000px; margin:0 auto; }
+  main { grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); }
+  .media-row { grid-template-columns:1fr 1fr; }
+}
