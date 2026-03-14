@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu du Restaurant</title>
+  <link rel="stylesheet" href="css/menu-public.css">
+</head>
+<body>
+  <header class="menu-header">
+    <div class="container">
+      <h1>🍽️ Menu du Restaurant</h1>
+      <div class="today-menu">
+        <span id="todayLabel">Aujourd'hui :</span>
+        <span id="todayDate"></span>
+        <span id="menuTypeLabel"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="menu-main">
+    <div class="container">
+      
+      <!-- Message spécial événement -->
+      <section id="eventBanner" class="menu-banner event-banner" style="display: none;">
+        <div class="banner-content">
+          <h2 id="eventTitle">Événement spécial</h2>
+          <p id="eventDateInfo"></p>
+        </div>
+      </section>
+
+      <!-- Menu du jour -->
+      <section class="menu-section" id="dailyMenuSection">
+        <h2 id="menuSectionTitle">Menu du jour</h2>
+        <div id="menuItemsList" class="menu-grid">
+          <div class="loading">Chargement du menu...</div>
+        </div>
+      </section>
+
+      <!-- Message si pas de menu -->
+      <section id="noMenuSection" class="no-menu" style="display: none;">
+        <div class="no-menu-content">
+          <p>Aucun menu disponible pour aujourd'hui.</p>
+          <p>Revenez demain ou contactez-nous !</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- JS public (réutilise tes modules existants) -->
+  <script type="module" src="js/menuPublic.js"></script>
+</body>
+</html>
