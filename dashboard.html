@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Restaurant</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <div>
+        <h1>Dashboard Restaurant</h1>
+        <p>Gestion des plats, menus semaine/week-end et événements</p>
+      </div>
+      <div class="today-info">
+        <span id="todayLabel">Aujourd’hui</span>
+        <span id="todayDate"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <!-- Colonne gauche : formulaire -->
+    <section class="panel panel-form">
+      <h2>Ajouter / modifier un plat</h2>
+
+      <form id="dishForm" autocomplete="off">
+        <!-- Identifiant caché pour édition -->
+        <input type="hidden" id="dishId">
+
+        <div class="form-group">
+          <label for="dishName">Nom du plat</label>
+          <input type="text" id="dishName" placeholder="Ex: Salade César" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dishPrice">Prix (€)</label>
+          <input type="number" id="dishPrice" step="0.01" placeholder="10.50" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dishCategory">Catégorie</label>
+          <select id="dishCategory" required>
+            <option value="" disabled selected>Choisir</option>
+            <option value="entree">Entrée</option>
+            <option value="plat">Plat</option>
+            <option value="dessert">Dessert</option>
+            <option value="boisson">Boisson</option>
+            <option value="promo">Promo</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="dishMenuType">Type de menu</label>
+          <select id="dishMenuType" required>
+            <option value="" disabled selected>Choisir</option>
+            <option value="semaine">Menu semaine</option>
+            <option value="weekend">Menu week-end</option>
+            <option value="jour">Menu du jour</option>
+            <option value="evenement">Événement</option>
+          </select>
+        </div>
+
+        <!-- Bloc événement : affichage dynamique -->
+        <div id="eventBlock" class="event-block" style="display:none;">
+          <div class="form-group">
+            <label for="eventSelect" id="eventSelectLabel">Événement</label>
+            <select id="eventSelect">
+              <!-- Options ajoutées en JS -->
+            </select>
+            <small class="hint-text" id="eventHint">
+              Choisissez un événement fixe (Noël…), variable (Ramadan…) ou personnalisé.
+            </small>
+          </div>
+
+          <div class="form-group" id="eventDateGroup" style="display:none;">
+            <label for="eventDate" id="eventDateLabel">Date de l'événement</label>
+            <input type="date" id="eventDate">
+          </div>
+
+          <div class="form-group" id="eventNameGroup" style="display:none;">
+            <label for="eventName" id="eventNameLabel">Nom de la fête</label>
+            <input type="text" id="eventName" placeholder="Nom de la fête (ex: Soirée Africaine)">
+          </div>
+
+          <p class="limits-info" id="eventLimitsInfo">
+            Règles : max 1 événement par jour, et jusqu’à 4 événements programmés à l’avance.
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label for="dishMedia">Média (image ou vidéo)</label>
+          <input type="file" id="dishMedia" accept="image/*,video/*">
+          <small class="hint-text">Optionnel. Taille raisonnable pour un chargement rapide.</small>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary" id="submitDishBtn">Ajouter le plat</button>
+          <button type="button" class="btn secondary" id="resetDishBtn">Réinitialiser</button>
+        </div>
+
+        <p class="form-message" id="formMessage"></p>
+      </form>
+    </section>
+
+    <!-- Colonne droite : listes -->
+    <section class="panel panel-list">
+      <header class="panel-header">
+        <div>
+          <h2>Plats enregistrés</h2>
+          <p>Filtrez par type de menu ou événement.</p>
+        </div>
+
+        <div class="filters">
+          <select id="filterMenuType">
+            <option value="all">Tous les types</option>
+            <option value="semaine">Semaine</option>
+            <option value="weekend">Week-end</option>
+            <option value="jour">Menu du jour</option>
+            <option value="evenement">Événements</option>
+          </select>
+
+          <select id="filterCategory">
+            <option value="all">Toutes catégories</option>
+            <option value="entree">Entrées</option>
+            <option value="plat">Plats</option>
+            <option value="dessert">Desserts</option>
+            <option value="boisson">Boissons</option>
+            <option value="promo">Promos</option>
+          </select>
+        </div>
+      </header>
+
+      <!-- Résumé des prochains événements -->
+      <section class="event-summary">
+        <h3>Prochains événements</h3>
+        <ul id="upcomingEventsList">
+          <!-- Rempli en JS -->
+        </ul>
+        <p class="hint-text">
+          Les événements sont prioritaires dans le menu public le jour J.
+        </p>
+      </section>
+
+      <!-- Tableau des plats -->
+      <section class="dish-list">
+        <div id="menuDashboard" class="table-wrapper">
+          <p>Chargement...</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- JS Modules -->
+  <script type="module" src="js/dashboardInit.js"></script>
+</body>
+</html>
